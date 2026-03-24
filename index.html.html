@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suite Cardiologica | Home</title>
+  <style>
+    :root{
+      --bg:#eef1f5;
+      --panel:#ffffff;
+      --panel-soft:#f8fafc;
+      --line:#d7dce3;
+      --text:#111111;
+      --muted:#5b6470;
+      --accent:#184f8a;
+      --accent-2:#2f7a2c;
+      --teal:#0f766e;
+      --violet:#6d3bb8;
+      --danger:#b42318;
+      --shadow:0 10px 30px rgba(17,24,39,.10);
+      --shadow-soft:0 6px 18px rgba(17,24,39,.06);
+      --radius:14px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    .app{
+      min-height:100vh;
+      display:grid;
+      grid-template-columns:290px minmax(0,1fr);
+    }
+
+    .sidebar{
+      background:var(--panel-soft);
+      border-right:1px solid var(--line);
+      padding:22px 18px;
+      position:sticky;
+      top:0;
+      height:100vh;
+      overflow:auto;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,var(--accent),#3a77be);
+      color:#fff;
+      font-size:22px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:23px;
+      color:var(--accent);
+      line-height:1.05;
+    }
+
+    .brand p{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.3;
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:14px;
+      margin-bottom:14px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .panel h2{
+      margin:0 0 10px;
+      font-size:13px;
+      color:var(--accent);
+      text-transform:uppercase;
+      letter-spacing:.05em;
+    }
+
+    .menu{
+      display:grid;
+      gap:8px;
+    }
+
+    .menu a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      text-decoration:none;
+      color:var(--text);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:11px 12px;
+      font-size:14px;
+      font-weight:700;
+      transition:.18s ease;
+    }
+
+    .menu a:hover,
+    .menu a:focus{
+      border-color:#9fb0c5;
+      transform:translateY(-1px);
+      outline:none;
+    }
+
+    .menu small{
+      color:var(--muted);
+      font-size:11px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .helper{
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.45;
+    }
+
+    .main{
+      padding:26px;
+      min-width:0;
+    }
+
+    .hero{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:26px;
+      box-shadow:var(--shadow);
+      margin-bottom:22px;
+    }
+
+    .hero-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .hero h2{
+      margin:0 0 8px;
+      font-size:28px;
+      color:var(--accent);
+      line-height:1.1;
+    }
+
+    .hero p{
+      margin:0;
+      max-width:760px;
+      color:var(--muted);
+      line-height:1.5;
+      font-size:15px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+      color:var(--accent);
+      font-size:13px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--accent-2);
+    }
+
+    .section-title{
+      margin:0 0 12px;
+      font-size:15px;
+      color:var(--accent);
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;
+    }
+
+    .card{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      min-height:220px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px;
+      text-decoration:none;
+      color:inherit;
+      box-shadow:var(--shadow-soft);
+      transition:.18s ease;
+      overflow:hidden;
+    }
+
+    .card:hover,
+    .card:focus{
+      transform:translateY(-3px);
+      border-color:#9fb0c5;
+      box-shadow:0 14px 28px rgba(17,24,39,.12);
+      outline:none;
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:auto -20px -20px auto;
+      width:110px;
+      height:110px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(24,79,138,.10), rgba(24,79,138,0) 70%);
+      pointer-events:none;
+    }
+
+    .card-icon{
+      width:46px;
+      height:46px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:20px;
+      margin-bottom:14px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .ic-blue{background:linear-gradient(135deg,var(--accent),#3b82c4)}
+    .ic-green{background:linear-gradient(135deg,var(--accent-2),#53a34f)}
+    .ic-teal{background:linear-gradient(135deg,var(--teal),#229b90)}
+    .ic-violet{background:linear-gradient(135deg,var(--violet),#8b5dd1)}
+    .ic-dark{background:linear-gradient(135deg,#285070,#4b7ba3)}
+
+    .card h3{
+      margin:0 0 8px;
+      font-size:19px;
+      color:var(--accent);
+      line-height:1.2;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.45;
+      font-size:14px;
+      flex:1;
+    }
+
+    .meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      margin-top:16px;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#eef3f9;
+      color:var(--accent);
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .open{
+      color:var(--accent);
+      font-weight:700;
+      font-size:13px;
+    }
+
+    .footer-note{
+      margin-top:22px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px 16px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .quick-actions{
+      display:grid;
+      gap:10px;
+    }
+
+    .quick-actions a{
+      text-decoration:none;
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:10px 12px;
+      background:#fff;
+      color:var(--accent);
+      font-weight:700;
+      font-size:14px;
+      transition:.18s ease;
+    }
+
+    .quick-actions a:hover,
+    .quick-actions a:focus{
+      border-color:#9fb0c5;
+      outline:none;
+    }
+
+    @media (max-width: 980px){
+      .app{grid-template-columns:1fr}
+      .sidebar{
+        position:relative;
+        height:auto;
+        border-right:0;
+        border-bottom:1px solid var(--line);
+      }
+      .main{padding:18px}
+      .hero{padding:20px}
+      .hero h2{font-size:24px}
+    }
+
+    @media (max-width: 560px){
+      .grid{grid-template-columns:1fr}
+      .hero-top{flex-direction:column}
+      .badge{white-space:normal}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">♥</div>
+        <div>
+          <h1>Suite<br>Cardiologica</h1>
+          <p>Homepage unica per referti, editor e calcolatori clinici</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Menu principale</h2>
+        <nav class="menu" aria-label="Menu applicazioni">
+          <a href="Analisi CPET.html"><span>Analisi CPET</span><small>Test da sforzo</small></a>
+          <a href="Referto eco trapianti.html"><span>Referto Eco Trapianti</span><small>Ecocardiografia</small></a>
+          <a href="Referto Studio Cardiologico Valente.html"><span>Studio Cardiologico Valente</span><small>Referto avanzato</small></a>
+          <a href="Referto Ambulatorio Generale.html"><span>Ambulatorio Generale</span><small>Visita cardiologica</small></a>
+          <a href="CardioMAth.html"><span>CardioMATH</span><small>Calcoli e strumenti</small></a>
+        </nav>
+      </div>
+
+      <div class="panel">
+        <h2>Accesso rapido</h2>
+        <div class="quick-actions">
+          <a href="CardioMAth.html">Apri CardioMATH</a>
+          <a href="Referto Ambulatorio Generale.html">Nuovo referto ambulatoriale</a>
+          <a href="Analisi CPET.html">Nuova analisi CPET</a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Note</h2>
+        <div class="helper">
+          Tutti i collegamenti puntano direttamente ai file HTML della suite. Mantiene lo stile grafico coerente con i moduli già presenti: palette chiara, card cliniche, bordi morbidi e navigazione semplice.
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="hero">
+        <div class="hero-top">
+          <div>
+            <h2>Dashboard clinica unificata</h2>
+            <p>
+              Seleziona il modulo desiderato dal menu laterale o dalle card qui sotto.
+              Questa homepage è stata costruita per armonizzarsi con lo stile dei file esistenti:
+              interfaccia medicale pulita, colori blu-grigio, card leggibili e navigazione immediata.
+            </p>
+          </div>
+          <div class="badge"><span class="dot"></span> 5 moduli collegati</div>
+        </div>
+      </section>
+
+      <h2 class="section-title">Moduli disponibili</h2>
+      <section class="grid">
+        <a class="card" href="Analisi CPET.html">
+          <div class="card-icon ic-blue">CP</div>
+          <h3>Analisi CPET</h3>
+          <p>Modulo dedicato al test cardiopolmonare con referto, archivio locale e flusso operativo completo.</p>
+          <div class="meta">
+            <span class="tag">Performance</span>
+            <span class="open">Apri →</span>
+          </div>
+        </a>
+
+        <a class="card" href="Referto eco trapianti.html">
+          <div class="card-icon ic-green">ET</div>
+          <h3>Referto Eco Trapianti</h3>
+          <p>Sezione dedicata ai referti ecocardiografici per follow-up e valutazione in ambito trapiantologico.</p>
+          <div class="meta">
+            <span class="tag">Ecocardiografia</span>
+            <span class="open">Apri →</span>
+          </div>
+        </a>
+
+        <a class="card" href="Referto Studio Cardiologico Valente.html">
+          <div class="card-icon ic-teal">SV</div>
+          <h3>Studio Cardiologico Valente</h3>
+          <p>Editor strutturato per referti specialistici con impianto grafico clinico e aree di testo estese.</p>
+          <div class="meta">
+            <span class="tag">Studio</span>
+            <span class="open">Apri →</span>
+          </div>
+        </a>
+
+        <a class="card" href="Referto Ambulatorio Generale.html">
+          <div class="card-icon ic-violet">AG</div>
+          <h3>Ambulatorio Generale</h3>
+          <p>Referto ambulatoriale completo per visita cardiologica, ECG, conclusioni e prescrizioni di follow-up.</p>
+          <div class="meta">
+            <span class="tag">Ambulatorio</span>
+            <span class="open">Apri →</span>
+          </div>
+        </a>
+
+        <a class="card" href="CardioMAth.html">
+          <div class="card-icon ic-dark">∑</div>
+          <h3>CardioMATH</h3>
+          <p>Hub di strumenti e calcolatori cardiovascolari, con impostazione più “suite” ma coerente col resto del progetto.</p>
+          <div class="meta">
+            <span class="tag">Tools</span>
+            <span class="open">Apri →</span>
+          </div>
+        </a>
+      </section>
+
+      <div class="footer-note">
+        File collegati: <strong>Analisi CPET.html</strong>, <strong>Referto eco trapianti.html</strong>,
+        <strong>Referto Studio Cardiologico Valente.html</strong>, <strong>Referto Ambulatorio Generale.html</strong> e
+        <strong>CardioMAth.html</strong>. Per il corretto funzionamento, mantieni questo file nella stessa cartella degli altri moduli.
+      </div>
+    </main>
+  </div>
+</body>
+</html>
